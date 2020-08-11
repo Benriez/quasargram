@@ -18,7 +18,10 @@
 
       <q-separator />
       <q-img src="https://cdn.quasar.dev/img/mountains.jpg" />
-
+      <q-card-section>
+        <div>beautiful mountains</div>
+        <div class="text-caption text-grey">June 10 9:04AM</div>
+      </q-card-section>
     </q-card>
   </q-page>
 </template>

@@ -1,13 +1,22 @@
 <template>
   <q-page class="constrain-more q-pa-md">
     <div class="camera-frame q-pa-md">
+      <!-- v-show instead of v-if -->
+      <!-- otherwise the content will be deleted from the dom -->
       <video
+        v-show="!imageCaptured"
         ref="video"
         autoplay
         class="full-width" />
+      <canvas
+        v-show="imageCaptured"
+        ref="canvas"
+        height="240" 
+        clas="full-width" />
     </div>
     <div class="text-center q-pa-md">
       <q-btn
+        @click="captureImage"
         round
         size="lg"
         color="grey-10"
@@ -60,7 +69,8 @@ export default {
         location: '',
         photo: null,
         date: Date.now()
-      }
+      },
+      imageCaptured: false
     }
   },
   methods: {
@@ -70,7 +80,16 @@ export default {
       }).then(stream => {
         this.$refs.video.srcObject = stream
       })
-    }
+    },
+    captureImage(){
+      let video = this.$refs.video
+      let canvas = this.$refs.canvas
+      canvas.width = video.getBoundingClientRect().width
+      canvas.height= video.getBoundingClientRect().height
+      let context = canvas.getContext('2d')
+      context.drawImage(video, 0, 0, canvas.width, canvas.height)
+      this.imageCaptured = true
+}
   },
   mounted() {
     this.initCamera()

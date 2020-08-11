@@ -18,8 +18,13 @@
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
-    <q-footer elevated>
-      <q-tabs>
+    <q-footer
+      class="bg-white"
+      bordered>
+      <q-tabs
+        class="text-grey-10"
+        active-color="primary"
+        indicator-color="transparent">
         <q-route-tab
           to="/"
           exact

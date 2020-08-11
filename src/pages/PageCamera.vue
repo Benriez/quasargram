@@ -11,6 +11,36 @@
         size="lg"
         color="grey-10"
         icon="eva-camera" />
+      <div class="row justify-center q-ma-md">
+        <q-input
+          v-model="text"
+          class="col"
+          dense
+          label="Caption" />
+      </div>
+      <div class="row justify-center q-ma-md">
+        <q-input
+          v-model="text"
+          class="col"
+          dense
+          label="Location" >
+        <template v-slot:append>
+          <q-btn
+            round
+            dense
+            flat
+            icon="eva-navigation-2-outline" />
+        </template>
+        </q-input>
+      </div>
+      <div class="row justify-center q-mt-lg">
+        <q-btn
+          unelevated
+          rounded
+          color="grey-10"
+          label="Post Image" />
+      </div>
+      
     </div>
   </q-page>
 </template>

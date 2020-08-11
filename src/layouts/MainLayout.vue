@@ -1,13 +1,14 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header
+      class="bg-white text-grey-10"
+      bordered>
       <q-toolbar>
 
-        <q-toolbar-title>
+        <q-toolbar-title class="text-center"> 
           Quasar App
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
     <q-footer

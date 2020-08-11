@@ -27,11 +27,13 @@
         outlined
         label="Choose an Image"
         v-model="imageUpload"
-        accept="image/*">
+        accept="image/*"
+        @input="captureImageFallback">
         <template v-slot:prepend>
           <q-icon name="eva-attach-outline" />
         </template>
       </q-file>
+
       <div class="row justify-center q-ma-md">
         <q-input
           v-model="post.caption"
@@ -105,6 +107,26 @@ export default {
       context.drawImage(video, 0, 0, canvas.width, canvas.height)
       this.imageCaptured = true
       this.post.photo = this.dataURItoBlob(canvas.toDataURL())
+    },
+    captureImageFallback(file){
+      console.log('file: ', file)
+      this.post.photo= file
+
+      let canvas = this.$refs.canvas
+      let context = canvas.getContext('2d')
+
+      var reader = new FileReader()
+      reader.onload = event => {
+        var img = new Image()
+        img.onload = () => {
+          canvas.width = img.width
+          canvas.height = img.height
+          context.drawImage(img,0,0)
+          this.imageCaptured = true
+        }
+        img.src = event.target.result
+      }
+      reader.readAsDataURL(file)
     },
     dataURItoBlob(dataURI) {
       // convert base64 to raw binary data held in a string

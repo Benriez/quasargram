@@ -29,13 +29,13 @@
           to="/"
           exact
           name="home"
-          icon="mail"
+          icon="eva-home-outline"
           label="Home" />
         <q-route-tab
           to="/camera"
           exact
           name="camera"
-          icon="alarm"
+          icon="eva-camera-outline"
           label="Camera" />
       </q-tabs>
 

@@ -25,13 +25,14 @@
       <q-img :src="post.imageUrl" />
       <q-card-section>
         <div>{{post.caption}}</div>
-        <div class="text-caption text-grey">{{post.date}}</div>
+        <div class="text-caption text-grey">{{post.date | dateToday}}</div>
       </q-card-section>
     </q-card>
   </q-page>
 </template>
 
 <script>
+import { date } from 'quasar'
 export default {
   name: 'PageHome',
   data() {
@@ -66,6 +67,11 @@ export default {
           imageUrl: 'https://cdn.quasar.dev/img/mountains.jpg'
         }
       ]
+    }
+  },
+  filters: {
+    dateToday(value) {
+      return date.formatDate(value, 'D MMMM H:mm')
     }
   }
 }

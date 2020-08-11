@@ -4,11 +4,25 @@
       class="bg-white text-grey-10"
       bordered>
       <q-toolbar>
-
+        <q-btn
+          class="large-screen-only"
+          to="/camera"
+          flat
+          dense
+          size="18px"
+          round
+          icon="eva-camera-outline" />
         <q-toolbar-title class="text-grand-hotel text-bold"> 
           Quasargram
         </q-toolbar-title>
-
+        <q-btn
+          class="large-screen-only"
+          to="/"
+          flat
+          dense
+          size="18px"
+          round
+          icon="eva-home-outline" />
       </q-toolbar>
     </q-header>
     <q-footer

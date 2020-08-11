@@ -12,7 +12,7 @@
       </q-toolbar>
     </q-header>
     <q-footer
-      class="bg-white"
+      class="bg-white small-screen-only"
       bordered>
       <q-tabs
         class="text-grey-10"

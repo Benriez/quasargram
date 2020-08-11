@@ -5,8 +5,8 @@
       bordered>
       <q-toolbar>
 
-        <q-toolbar-title class="text-center"> 
-          Quasar App
+        <q-toolbar-title> 
+          Quasargram
         </q-toolbar-title>
 
       </q-toolbar>
@@ -52,4 +52,8 @@ export default {
   .q-footer
     .q-tab__icon
       font-size: 30px
+
+  .q-header
+    .q-toolbar__title
+      text-align: center
 </style>

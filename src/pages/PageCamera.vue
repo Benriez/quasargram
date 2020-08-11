@@ -1,5 +1,5 @@
 <template>
-  <q-page class="constrain q-pa-md">
+  <q-page class="constrain-more q-pa-md">
     <div class="camera-frame q-pa-md">
       <img
         class="full-width"
@@ -14,14 +14,14 @@
       <div class="row justify-center q-ma-md">
         <q-input
           v-model="text"
-          class="col"
+          class="col col-sm-6"
           dense
           label="Caption" />
       </div>
       <div class="row justify-center q-ma-md">
         <q-input
           v-model="text"
-          class="col"
+          class="col col-sm-6"
           dense
           label="Location" >
         <template v-slot:append>

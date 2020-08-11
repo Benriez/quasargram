@@ -28,15 +28,11 @@
         <q-route-tab
           to="/"
           exact
-          name="home"
-          icon="eva-home-outline"
-          label="Home" />
+          icon="eva-home-outline"/>
         <q-route-tab
           to="/camera"
           exact
-          name="camera"
-          icon="eva-camera-outline"
-          label="Camera" />
+          icon="eva-camera-outline"/>
       </q-tabs>
 
     </q-footer>

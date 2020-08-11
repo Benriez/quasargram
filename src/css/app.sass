@@ -2,3 +2,15 @@
 
 .text-grand-hotel
     font-family: 'Grand Hotel', 'Roboto', 'Helvetica Neue', Helvetica, Aria, sans-serif 
+
+.small-screen-only
+    @media (max-width: $breakpoint-xs-max)
+        display: block
+    @media (max-width: $breakpoint-sm-min)
+        display: none
+
+.large-screen-only
+    @media (max-width: $breakpoint-xs-max)
+        display: none
+    @media (max-width: $breakpoint-sm-min)
+        display: block

@@ -12,7 +12,7 @@
         v-show="imageCaptured"
         ref="canvas"
         height="240" 
-        clas="full-width" />
+        class="full-width" />
     </div>
     <div class="text-center q-pa-md">
       <q-btn
@@ -107,9 +107,9 @@ export default {
       context.drawImage(video, 0, 0, canvas.width, canvas.height)
       this.imageCaptured = true
       this.post.photo = this.dataURItoBlob(canvas.toDataURL())
+      this.disableCamera()
     },
     captureImageFallback(file){
-      console.log('file: ', file)
       this.post.photo= file
 
       let canvas = this.$refs.canvas
@@ -127,6 +127,11 @@ export default {
         img.src = event.target.result
       }
       reader.readAsDataURL(file)
+    },
+    disableCamera() {
+      this.$refs.video.srcObject.getVideoTracks().forEach(track => {
+        track.stop()
+      })
     },
     dataURItoBlob(dataURI) {
       // convert base64 to raw binary data held in a string
@@ -155,6 +160,11 @@ export default {
   },
   mounted() {
     this.initCamera()
+  },
+  beforeDestroy() {
+    if (this.hasCameraSupport){
+      this.disableCamera()
+    }
   }
 }
 </script>

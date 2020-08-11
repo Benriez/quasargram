@@ -28,7 +28,41 @@
 
 <script>
 export default {
-  name: 'PageHome'
+  name: 'PageHome',
+  data() {
+    return {
+      post: [
+        {
+          id:1,
+          caption: 'beautiful mountain',
+          date: 1597150477321,
+          location: 'Darmstadt, DE',
+          imageUrl: 'https://cdn.quasar.dev/img/mountains.jpg'
+        },
+        {
+          id:2,
+          caption: 'beautiful mountain',
+          date: 1597150477321,
+          location: 'Darmstadt, DE',
+          imageUrl: 'https://cdn.quasar.dev/img/mountains.jpg'
+        },
+        {
+          id:3,
+          caption: 'beautiful mountain',
+          date: 1597150477321,
+          location: 'Darmstadt, DE',
+          imageUrl: 'https://cdn.quasar.dev/img/mountains.jpg'
+        },
+        {
+          id:4,
+          caption: 'beautiful mountain',
+          date: 1597150477321,
+          location: 'Darmstadt, DE',
+          imageUrl: 'https://cdn.quasar.dev/img/mountains.jpg'
+        }
+      ]
+    }
+  }
 }
 </script>
 

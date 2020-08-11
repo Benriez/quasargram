@@ -1,6 +1,11 @@
 <template>
   <q-page class="constrain q-pa-md">
-    <q-card class="card-post" flat bordered>
+    <q-card
+      v-for="post in posts"
+      :key="post.id"
+      class="card-post q-mb-md"
+      flat
+      bordered>
       <q-item>
         <q-item-section avatar>
           <q-avatar>
@@ -11,16 +16,16 @@
         <q-item-section>
           <q-item-label class="text-bold">benny_riezler</q-item-label>
           <q-item-label caption>
-            Darmstadt, DE
+            {{post.location}}
           </q-item-label>
         </q-item-section>
       </q-item>
 
       <q-separator />
-      <q-img src="https://cdn.quasar.dev/img/mountains.jpg" />
+      <q-img :src="post.imageUrl" />
       <q-card-section>
-        <div>beautiful mountains</div>
-        <div class="text-caption text-grey">June 10 9:04AM</div>
+        <div>{{post.caption}}</div>
+        <div class="text-caption text-grey">{{post.date}}</div>
       </q-card-section>
     </q-card>
   </q-page>
@@ -31,7 +36,7 @@ export default {
   name: 'PageHome',
   data() {
     return {
-      post: [
+      posts: [
         {
           id:1,
           caption: 'beautiful mountain',
@@ -41,7 +46,7 @@ export default {
         },
         {
           id:2,
-          caption: 'beautiful mountain',
+          caption: 'nice weather',
           date: 1597150477321,
           location: 'Darmstadt, DE',
           imageUrl: 'https://cdn.quasar.dev/img/mountains.jpg'

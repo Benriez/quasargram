@@ -54,3 +54,9 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+  .q-footer
+    .q-tab__icon
+      font-size: 30px
+</style>

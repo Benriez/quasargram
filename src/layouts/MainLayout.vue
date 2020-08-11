@@ -5,13 +5,17 @@
       bordered>
       <q-toolbar>
         <q-btn
-          class="large-screen-only"
+          class="large-screen-only q-mr-sm"
           to="/camera"
           flat
           dense
           size="18px"
           round
           icon="eva-camera-outline" />
+        <q-separator
+          class="large-screen-only"
+          spaced
+          vertical />
         <q-toolbar-title class="text-grand-hotel text-bold"> 
           Quasargram
         </q-toolbar-title>
@@ -69,6 +73,10 @@ export default {
 
   .q-header
     .q-toolbar__title
-      text-align: center
+      @media (max-width: $breakpoint-xs-max)
+        text-align: center
       font-size: 30px
+    .q-toolbar
+      @media (min-width: $breakpoint-sm-min)
+        min-height: 77px
 </style>

@@ -13,14 +13,14 @@
         icon="eva-camera" />
       <div class="row justify-center q-ma-md">
         <q-input
-          v-model="text"
+          v-model="post.caption"
           class="col col-sm-6"
           dense
           label="Caption" />
       </div>
       <div class="row justify-center q-ma-md">
         <q-input
-          v-model="text"
+          v-model="post.location"
           class="col col-sm-6"
           dense
           label="Location" >
@@ -46,8 +46,21 @@
 </template>
 
 <script>
+import { uid } from 'quasar'
+
 export default {
-  name: 'PageCamera'
+  name: 'PageCamera',
+  data() {
+    return {
+      post: {
+        id: uid(),
+        caption: '',
+        location: '',
+        photo: null,
+        date: Date.now()
+      }
+    }
+  }
 }
 </script>
 

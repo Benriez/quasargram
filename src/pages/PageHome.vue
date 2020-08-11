@@ -17,7 +17,7 @@
       </q-item>
 
       <q-separator />
-
+      <q-img src="https://cdn.quasar.dev/img/mountains.jpg" />
 
     </q-card>
   </q-page>
@@ -28,3 +28,9 @@ export default {
   name: 'PageHome'
 }
 </script>
+
+<style lang="sass">
+  .card-post
+    q-img
+      min-height: 200px
+</style>

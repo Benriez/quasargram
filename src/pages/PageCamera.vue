@@ -44,12 +44,14 @@
       <div class="row justify-center q-ma-md">
         <q-input
           v-model="post.location"
+          :loading="locationLoading"
           class="col col-sm-6"
           dense
           label="Location" >
         <template v-slot:append>
           <q-btn
             @click="getLocation"
+            v-if="!locationLoading"
             round
             dense
             flat
@@ -86,7 +88,8 @@ export default {
       },
       imageCaptured: false,
       imageUpload: [],
-      hasCameraSupport: true
+      hasCameraSupport: true,
+      locationLoading: false
     }
   },
   methods: {
@@ -159,11 +162,12 @@ export default {
 
     },
     getLocation(){
+      this.locationLoading = true
       navigator.geolocation.getCurrentPosition(position => {
         this.getCityAndCountry(position)
       }, err => {
         this.locationError()
-      }, {timeout: 7000})
+      }, {timeout: 10000})
     },
     getCityAndCountry(position){
       // use `` to interpolate the string
@@ -180,12 +184,14 @@ export default {
       if (result.data.country) {
         this.post.location += `, ${result.data.country}`
       }
+      this.locationLoading = false
     },
     locationError() {
       this.$q.dialog({
         title: 'Error',
         message: 'Could not find location'
       })
+      this.locationLoading = false
     }
   },
   mounted() {

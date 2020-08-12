@@ -49,6 +49,7 @@
           label="Location" >
         <template v-slot:append>
           <q-btn
+            @click="getLocation"
             round
             dense
             flat
@@ -156,6 +157,13 @@ export default {
       var blob = new Blob([ab], {type: mimeString});
       return blob;
 
+    },
+    getLocation(){
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log('position: ', position)
+      }, err => {
+        console.log('err: ', err)
+      }, {timeout: 7000})
     }
   },
   mounted() {

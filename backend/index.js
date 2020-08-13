@@ -26,17 +26,14 @@
     endpoint - posts
 */
     app.get('/posts', (request, response) => {
-        let posts = [
-            {
-                caption:'Golden Gate',
-                location: 'San Francisco'
-            },
-            {
-                caption:'London Eye',
-                location: 'London'
-            }
-        ]
-        response.send(posts)
+        let posts = []
+        db.collection('posts').get().then(snapshot => {
+            snapshot.forEach((doc) => {
+                console.log(doc.id, '=>', doc.data());
+                posts.push(doc.data())
+            });
+            response.send(posts)
+        })
     })
 
 

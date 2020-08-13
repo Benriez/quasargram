@@ -67,7 +67,10 @@ export default {
       this.$axios.get('http://localhost:3000/posts').then(response => {
         this.posts= response.data
       }).catch(err => {
-        console.log('err ', err)
+        this.$q.dialog({
+          title: 'Error',
+          message: 'Loading Error'
+        })
       })
     }
   },

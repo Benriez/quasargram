@@ -2,9 +2,12 @@
     dependencies
 */
     const express = require('express')
-    const admin = require('firebase-admin');
-    let inspect = require('util').inspect;
-    let Busboy = require('busboy');
+    const admin = require('firebase-admin')
+    let inspect = require('util').inspect
+    let Busboy = require('busboy')
+    let path = require('path')
+    let os = require('os')
+    let fs = require('fs')
 
 /*
     config express
@@ -18,10 +21,12 @@
     const serviceAccount = require('./serviceAccountKey.json');
 
     admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
+        credential: admin.credential.cert(serviceAccount),
+        storageBucket: "quasargram-5a2d4.appspot.com"
     });
 
     const db = admin.firestore();
+    let bucket = admin.storage().bucket();
 
 
 /*
@@ -48,15 +53,14 @@ app.post('/createPost', (request, response) => {
     var busboy = new Busboy({ headers: request.headers });
 
     let fields = {}
+    let fileData = {}
 
     busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
       console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
-      file.on('data', function(data) {
-        console.log('File [' + fieldname + '] got ' + data.length + ' bytes');
-      });
-      file.on('end', function() {
-        console.log('File [' + fieldname + '] Finished');
-      });
+      // /temp/uuid.png
+      let filepath = path.join(os.tmpdir(), filename)
+      file.pipe(fs.createWriteStream(filepath))
+      fileData = {filepath, mimetype}
     });
 
     busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {

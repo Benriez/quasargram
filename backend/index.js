@@ -68,7 +68,7 @@ app.post('/createPost', (request, response) => {
         id: fields.id,
         caption: fields.caption,
         location: fields.location,
-        date: fields.date,
+        date: parseInt(fields.date),
         imageUrl: 'https://firebasestorage.googleapis.com/v0/b/quasargram-5a2d4.appspot.com/o/goldenGate.jpg?alt=media&token=4440b884-9235-472b-af8c-855291178aca'
       })
       response.send('Done parsing form');

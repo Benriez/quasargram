@@ -11,10 +11,20 @@
 
 
 /*
-    endpoint
+    endpoint - posts
 */
-    app.get('/', (request, response) => {
-    response.send('blabla')
+    app.get('/posts', (request, response) => {
+        let posts = [
+            {
+                caption:'Golden Gate',
+                location: 'San Francisco'
+            },
+            {
+                caption:'London Eye',
+                location: 'London'
+            }
+        ]
+        response.send(posts)
     })
 
 

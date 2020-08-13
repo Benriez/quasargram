@@ -44,11 +44,14 @@
       <div class="row justify-center q-ma-md">
         <q-input
           v-model="post.location"
+          :loading="locationLoading"
           class="col col-sm-6"
           dense
           label="Location" >
         <template v-slot:append>
           <q-btn
+            @click="getLocation"
+            v-if="!locationLoading && locationSupported"
             round
             dense
             flat
@@ -58,6 +61,7 @@
       </div>
       <div class="row justify-center q-mt-lg">
         <q-btn
+          @click="addPost"
           unelevated
           rounded
           color="grey-10"
@@ -85,7 +89,14 @@ export default {
       },
       imageCaptured: false,
       imageUpload: [],
-      hasCameraSupport: true
+      hasCameraSupport: true,
+      locationLoading: false
+    }
+  },
+  computed: {
+    locationSupported(){
+      if ('geolocation' in navigator) return true
+      return false
     }
   },
   methods: {
@@ -156,6 +167,53 @@ export default {
       var blob = new Blob([ab], {type: mimeString});
       return blob;
 
+    },
+    getLocation(){
+      this.locationLoading = true
+      navigator.geolocation.getCurrentPosition(position => {
+        this.getCityAndCountry(position)
+      }, err => {
+        this.locationError()
+      }, {timeout: 7000})
+    },
+    getCityAndCountry(position){
+      // use `` to interpolate the string
+      let apiUrl = `https://geocode.xyz/${position.coords.latitude},${position.coords.longitude}?json=1`
+      // axios calls the url
+      this.$axios.get(apiUrl).then(result => {
+        this.locationSuccess(result)
+      }).catch(err => {
+        this.locationError()
+      })
+    },
+    locationSuccess(result){
+      this.post.location = result.data.city
+      if (result.data.country) {
+        this.post.location += `, ${result.data.country}`
+      }
+      this.locationLoading = false
+    },
+    locationError() {
+      this.$q.dialog({
+        title: 'Error',
+        message: 'Could not find location'
+      })
+      this.locationLoading = false
+    },
+    addPost() {
+      //because we send an image it needs to be a FormData
+      let formData = new FormData()
+      formData.append('id', this.post.id)
+      formData.append('caption', this.post.caption)
+      formData.append('location', this.post.location)
+      formData.append('date', this.post.date)
+      formData.append('file', this.post.photo, this.post.id + '.png')
+
+      this.$axios.post(`${process.env.API}/createPost`, formData).then(response => {
+        console.log('response ', response)
+      }).catch(err => {
+        console.log('err ', err)
+      })
     }
   },
   mounted() {

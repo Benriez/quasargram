@@ -91,10 +91,22 @@ export default {
       ]
     }
   },
+  methods: {
+    getPost(){
+      this.$axios.get('http://localhost:3000/posts').then(response => {
+        console.log('response: ', response)
+      }).catch(err => {
+        console.log('err ', err)
+      })
+    }
+  },
   filters: {
     dateToday(value) {
       return date.formatDate(value, 'D MMMM H:mm')
     }
+  },
+  created(){
+    this.getPost()
   }
 }
 </script>

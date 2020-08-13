@@ -1,11 +1,24 @@
-const express = require('express')
-const app = express()
-const port = 3000
+/*
+    dependencies
+*/
+    const express = require('express')
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+/*
+    config express
+*/
+    const app = express()
+
+
+/*
+    endpoint
+*/
+    app.get('/', (request, response) => {
+    response.send('blabla')
+    })
+
+
+/*
+    Listen
+*/
+    app.listen(3000)

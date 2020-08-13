@@ -37,6 +37,13 @@
         })
     })
 
+/*
+    endpoint - create post
+*/
+app.get('/createPost', (request, response) => {
+    response.set('Access-Control-Allow-Origin', '*')   
+    response.send('createPost')
+})
 
 /*
     Listen

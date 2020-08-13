@@ -59,42 +59,13 @@ export default {
   name: 'PageHome',
   data() {
     return {
-      posts: [
-        {
-          id:1,
-          caption: 'beautiful mountain',
-          date: 1597150477321,
-          location: 'Darmstadt, DE',
-          imageUrl: 'https://cdn.quasar.dev/img/mountains.jpg'
-        },
-        {
-          id:2,
-          caption: 'nice weather',
-          date: 1597150477321,
-          location: 'Darmstadt, DE',
-          imageUrl: 'https://cdn.quasar.dev/img/mountains.jpg'
-        },
-        {
-          id:3,
-          caption: 'beautiful mountain',
-          date: 1597150477321,
-          location: 'Darmstadt, DE',
-          imageUrl: 'https://cdn.quasar.dev/img/mountains.jpg'
-        },
-        {
-          id:4,
-          caption: 'beautiful mountain',
-          date: 1597150477321,
-          location: 'Darmstadt, DE',
-          imageUrl: 'https://cdn.quasar.dev/img/mountains.jpg'
-        }
-      ]
+      posts: []
     }
   },
   methods: {
     getPost(){
       this.$axios.get('http://localhost:3000/posts').then(response => {
-        console.log('response: ', response)
+        this.posts= response.data
       }).catch(err => {
         console.log('err ', err)
       })

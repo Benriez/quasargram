@@ -173,7 +173,7 @@ export default {
         this.getCityAndCountry(position)
       }, err => {
         this.locationError()
-      }, {timeout: 10000})
+      }, {timeout: 7000})
     },
     getCityAndCountry(position){
       // use `` to interpolate the string

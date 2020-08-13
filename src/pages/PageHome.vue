@@ -3,35 +3,41 @@
 
     <div class="row q-col-gutter-lg">
       <div class="col-12 col-sm-8">
-        <q-card
-          v-for="post in posts"
-          :key="post.id"
-          class="card-post q-mb-md"
-          flat
-          bordered>
-          <q-item>
-            <q-item-section avatar>
-              <q-avatar>
-                <img src="https://cdn.quasar.dev/img/boy-avatar.png">
-              </q-avatar>
-            </q-item-section>
+        <template v-if="!loadingPosts">
+          <q-card
+            v-for="post in posts"
+            :key="post.id"
+            class="card-post q-mb-md"
+            flat
+            bordered>
+            <q-item>
+              <q-item-section avatar>
+                <q-avatar>
+                  <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+                </q-avatar>
+              </q-item-section>
 
-            <q-item-section>
-              <q-item-label class="text-bold">benny_riezler</q-item-label>
-              <q-item-label caption>
-                {{post.location}}
-              </q-item-label>
-            </q-item-section>
-          </q-item>
+              <q-item-section>
+                <q-item-label class="text-bold">benny_riezler</q-item-label>
+                <q-item-label caption>
+                  {{post.location}}
+                </q-item-label>
+              </q-item-section>
+            </q-item>
 
-          <q-separator />
-          <q-img :src="post.imageUrl" />
-          <q-card-section>
-            <div>{{post.caption}}</div>
-            <div class="text-caption text-grey">{{post.date | dateToday}}</div>
-          </q-card-section>
-        </q-card>
+            <q-separator />
+            <q-img :src="post.imageUrl" />
+            <q-card-section>
+              <div>{{post.caption}}</div>
+              <div class="text-caption text-grey">{{post.date | dateToday}}</div>
+            </q-card-section>
+          </q-card>
+        </template>
+        <template v-else>
+          Loading ...
+        </template>
       </div>
+
       <div class="col-4 large-screen-only">
         <q-item class="fixed">
           <q-item-section avatar>
@@ -59,18 +65,22 @@ export default {
   name: 'PageHome',
   data() {
     return {
-      posts: []
+      posts: [],
+      loadingPosts: false
     }
   },
   methods: {
     getPost(){
+      this.loadingPosts = true
       this.$axios.get('http://localhost:3000/posts').then(response => {
         this.posts= response.data
+        this.loadingPosts = false 
       }).catch(err => {
         this.$q.dialog({
           title: 'Error',
           message: 'Loading Error'
         })
+        this.loadingPosts = false
       })
     }
   },
